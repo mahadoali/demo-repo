@@ -2,35 +2,32 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  
-  <title>English Learning App - Somali/English/Swahili</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>English Learning App - Somali/English</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
-    body { font-family: 'Inter', sans-serif; background: #f8fafc; -webkit-tap-highlight-color: transparent; }
+    body { font-family: 'Inter', sans-serif; background: #f8fafc; }
     .shake { animation: shake 0.4s; }
     @keyframes shake {
       0%, 100% { transform: translateX(0); }
       25% { transform: translateX(-6px); }
       75% { transform: translateX(6px); }
     }
-    /* Prevents clicking on mobile from highlighting the whole card */
-    button { outline: none !important; }
   </style>
 </head>
 <body>
 
-<div id="app" class="max-w-xl mx-auto p-4 sm:p-6">
+<div id="app" class="max-w-xl mx-auto p-6">
   <div id="header" class="mb-6">
     <div class="flex justify-between items-center mb-2">
-      <button onclick="goBack()" class="text-slate-400 font-medium text-sm">← Back</button>
+      <button onclick="goBack()" class="text-slate-400 font-medium">← Dib u laabo (Back)</button>
       <div class="flex items-center gap-2">
-        <h1 id="lesson-title-display" class="font-bold text-base sm:text-lg text-slate-800">Lesson 5</h1>
-        <span id="premium-badge" class="hidden bg-amber-100 text-amber-700 text-[10px] px-2 py-1 rounded-md font-bold border border-amber-200">PRO 🔒</span>
+        <h1 class="font-bold text-lg text-slate-800">Lesson 5: Daily Activities</h1>
+        <span id="premium-badge" class="bg-amber-100 text-amber-700 text-[10px] px-2 py-1 rounded-md font-bold border border-amber-200">PRO 🔒</span>
       </div>
     </div>
-    <p id="time-est" class="text-[9px] text-slate-400 uppercase tracking-widest font-bold mb-2">⏱️ 20 MINS</p>
+    <p class="text-[10px] text-slate-400 uppercase tracking-widest font-bold mb-2">⏱️ 20 Daqiiqo (20 mins)</p>
     
     <div class="w-full bg-slate-200 rounded-full h-2">
       <div id="progressBar" class="bg-blue-600 h-2 rounded-full transition-all duration-500" style="width: 0%"></div>
@@ -38,153 +35,178 @@
   </div>
 
   <div id="screen-learning">
-    <p class="text-center text-slate-500 mb-6 text-sm italic">Dhageyso oo ku celi:</p>
-    <div id="content-card" class="bg-white rounded-3xl shadow-sm border border-slate-100 p-6 sm:p-8 text-center mb-8">
-      <div id="normal-content">
-        <h2 id="en-text" class="text-2xl font-bold text-blue-900 mb-1"></h2>
-        <p id="sw-text" class="text-xs text-blue-400 font-medium mb-3 uppercase tracking-wide"></p>
-        <p id="so-text" class="text-slate-400 text-lg italic mb-6"></p>
-      </div>
-      
-      <div id="dialogue-content" class="hidden space-y-4 text-left mb-6"></div>
-
-      <button onclick="playAudio()" class="bg-blue-50 p-5 rounded-full text-blue-600 text-3xl hover:scale-110 active:scale-95 transition">🔈</button>
+    <p class="text-center text-slate-500 mb-6 italic">Dhageyso oo ku celi (Listen and repeat):</p>
+    <div class="bg-white rounded-3xl shadow-sm border border-slate-100 p-10 text-center mb-8">
+      <h2 id="en-text" class="text-2xl font-bold text-blue-900 mb-2"></h2>
+      <p id="so-text" class="text-slate-400 text-lg italic mb-4"></p>
+      <button onclick="playAudio()" class="bg-blue-50 p-5 rounded-full text-blue-600 text-3xl hover:scale-110 transition">🔈</button>
     </div>
 
-    <div id="speaking-controls" class="flex flex-col items-center">
-      <button id="micBtn" onclick="handleMicClick()" class="w-20 h-20 sm:w-24 sm:h-24 bg-blue-600 text-white text-3xl sm:text-4xl rounded-full shadow-xl flex items-center justify-center transition-all active:scale-90">🎤</button>
-      <p id="micStatus" class="mt-4 text-slate-500 font-medium text-sm">Taabo si aad u hadasho</p>
+    <div class="flex flex-col items-center">
+      <button id="micBtn" onclick="handleMicClick()" class="w-24 h-24 bg-blue-600 text-white text-4xl rounded-full shadow-xl flex items-center justify-center transition-all active:scale-95">🎤</button>
+      <p id="micStatus" class="mt-4 text-slate-500 font-medium">Taabo si aad u hadasho (Tap to speak)</p>
     </div>
   </div>
 
   <div id="screen-quiz" class="hidden">
-    <h2 class="text-center font-bold text-xl mb-6 text-slate-800">Is-tijaabi</h2>
-    <div class="bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-slate-100 text-center">
-      <p id="quiz-question-text" class="text-lg sm:text-xl font-bold text-slate-800 mb-6"></p>
-      
-      <div id="quiz-options" class="space-y-3"></div>
-      <div id="quiz-input-container" class="hidden">
-        <input type="text" id="quiz-input" class="w-full p-4 border-2 border-slate-100 rounded-2xl text-center font-bold focus:border-blue-500 outline-none text-lg" placeholder="Qor jawaabta...">
-        <button onclick="checkFillIn()" class="w-full mt-4 bg-slate-800 text-white py-4 rounded-xl font-bold">Check Answer</button>
+    <h2 class="text-center font-bold text-xl mb-6 text-slate-800">Is-tijaabi (Quiz)</h2>
+    <div class="bg-white rounded-3xl p-8 shadow-sm border border-slate-100 text-center">
+      <div id="quiz-question-container" class="mb-8">
+        <p id="quiz-question-en" class="text-xl font-bold text-slate-800 mb-1"></p>
+        <p id="quiz-question-so" class="text-md text-slate-500 italic"></p>
       </div>
+
+      <div id="quiz-options" class="space-y-4"></div>
       
-      <div id="quiz-hint-box" class="hidden mt-6 p-4 bg-yellow-50 text-yellow-800 rounded-2xl text-xs border border-yellow-100 font-bold text-left">
+      <div id="quiz-hint-box" class="hidden mt-6 p-4 bg-yellow-50 text-yellow-800 rounded-2xl text-sm border border-yellow-100 font-bold">
         💡 Caawinaad: <span id="quiz-hint-text"></span>
       </div>
       <p id="quiz-feedback" class="mt-6 font-bold text-lg hidden"></p>
     </div>
-    <button id="next-quiz-btn" onclick="nextQuizQuestion()" class="hidden w-full mt-6 bg-blue-600 text-white py-4 rounded-2xl font-bold shadow-lg">Sii soco</button>
+    <button id="next-quiz-btn" onclick="nextQuizQuestion()" class="hidden w-full mt-6 bg-blue-600 text-white py-4 rounded-2xl font-bold shadow-lg">Sii soco (Continue)</button>
   </div>
 
   <div id="screen-dashboard" class="hidden">
-    <h1 class="font-bold text-xl mb-1">Natiijada Maanta</h1>
-    <div id="dashboard-list" class="space-y-3 mt-6"></div>
-    <button onclick="location.reload()" class="w-full mt-10 bg-blue-600 text-white py-4 rounded-2xl font-bold shadow-lg">Restart</button>
+    <h1 class="font-bold text-xl mb-1">Natiijada Maanta (Review Dashboard)</h1>
+    <p class="text-sm text-gray-500 mb-8 italic">Ereyada u baahan ku celcelin (Words needing review):</p>
+    <div id="dashboard-list" class="space-y-4"></div>
+    <button onclick="location.reload()" class="w-full mt-10 bg-blue-600 text-white py-4 rounded-2xl font-bold shadow-lg">Mar kale baro (Learn Again)</button>
   </div>
 
-  <div id="feedback-overlay" class="hidden fixed inset-0 bg-black/40 backdrop-blur-sm flex items-end sm:items-center justify-center p-4 z-50">
-    <div class="bg-white rounded-t-3xl sm:rounded-2xl shadow-xl p-6 w-full max-w-sm text-center animate-slide-up">
+  <div id="feedback-overlay" class="hidden fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center p-4 z-50">
+    <div class="bg-white rounded-2xl shadow-xl p-6 w-full max-w-sm text-center">
       <div class="mb-4">
         <div id="feedback-stars" class="text-yellow-400 text-2xl">⭐⭐⭐⭐☆</div>
+        <p class="text-xs text-gray-400 uppercase font-bold mt-1 tracking-widest">Dhibcaha dhuwaaqida (Pronunciation Score)</p>
       </div>
+
       <h3 class="font-bold text-slate-800 mb-2">AI Coach Feedback</h3>
+
       <div class="bg-slate-50 rounded-xl p-4 mb-6 text-left border border-slate-100">
-        <p id="coach-so" class="text-slate-700 font-medium mb-1 text-sm"></p>
-        <p id="coach-en" class="text-slate-400 text-xs italic"></p>
+        <p id="coach-so" class="text-slate-700 font-medium mb-2"></p>
+        <p id="coach-en" class="text-slate-400 text-sm italic"></p>
       </div>
+
       <div class="flex gap-3">
-        <button id="btnTryAgain" onclick="closeFeedback(false)" class="w-1/2 border-2 border-blue-600 text-blue-600 py-3 rounded-xl font-bold text-sm">🔄 Mar kale</button>
-        <button id="btnContinue" onclick="closeFeedback(true)" class="w-1/2 bg-blue-600 text-white py-3 rounded-xl font-bold shadow-md text-sm">➡ Sii soco</button>
+        <button id="btnTryAgain" onclick="closeFeedback(false)" class="w-1/2 border-2 border-blue-600 text-blue-600 py-3 rounded-xl font-bold">🔄 Mar kale (Try Again)</button>
+        <button id="btnContinue" onclick="closeFeedback(true)" class="w-1/2 bg-blue-600 text-white py-3 rounded-xl font-bold shadow-md">➡ Sii soco (Continue)</button>
       </div>
     </div>
   </div>
 </div>
 
 <script>
-// Logic remains the same as your previous version
 const lessonData = {
-  "is_premium": true,
-  "estimated_time_minutes": 20,
+  "is_premium": true, 
   "content": [
-    { "type": "vocabulary", "somali": "Cunidda", "english": "Eating", "swahili": "Kula", "enable_speaking": true },
-    { "type": "vocabulary", "somali": "Cabidda", "english": "Drinking", "swahili": "Kunywa", "enable_speaking": true },
-    { "type": "vocabulary", "somali": "Socodka", "english": "Walking", "swahili": "Kutembea", "enable_speaking": true },
-    { "type": "sentence", "somali": "Waxaan cunaa quraac subax kasta.", "english": "I eat breakfast every morning.", "swahili": "Ninakula...", "enable_speaking": true },
-    { "type": "dialogue", "lines": [
-        { "speaker": "Ali", "somali": "Maxaad samaynaysaa?", "english": "What are you doing?", "swahili": "Unafanya nini?" },
-        { "speaker": "Friend", "somali": "Waxaan cabayaa biyo.", "english": "I am drinking water.", "swahili": "Ninakunywa maji." }
-    ]}
+    { "somali": "Cunidda", "english": "Eating", "type": "vocabulary" },
+    { "somali": "Cabidda", "english": "Drinking", "type": "vocabulary" },
+    { "somali": "Socodka", "english": "Walking", "type": "vocabulary" },
+    { "somali": "Waxaan cunaa quraac subax kasta.", "english": "I eat breakfast every morning.", "type": "sentence" }
   ],
-  "quiz_data": [
-    { "question": "What does 'Cunidda' mean in English?", "options": ["Eating", "Sleeping", "Walking"], "answer": "Eating", "hint": "The act of eating." },
-    { "question": "Complete: 'Waxaan ___ quraac subax kasta.'", "answer": "cunaa", "hint": "Eating breakfast.", "type": "fill" }
+  "quiz": [
+    { 
+      "q_en": "What does 'Cunidda' mean in English?", 
+      "q_so": "Maxay ka dhigantahay 'Cunidda' af-Ingiriis ahaan?",
+      "a": "Eating", 
+      "options": ["Eating", "Sleeping", "Walking"], 
+      "hint": "Waxaad samaysaa markaad gaajoonayso (Cunid)" 
+    },
+    { 
+      "q_en": "Which Somali word means 'Walking'?", 
+      "q_so": "Ereygee Soomaali ah ayaa loola jeedaa 'Walking'?",
+      "a": "Socodka", 
+      "options": ["Socodka", "Seexashada", "Cabidda"], 
+      "hint": "Markaad lugahaaga ku soconayso" 
+    }
   ]
 };
 
 let currentIdx = 0;
 let quizIdx = 0;
-let isQuizMode = false;
+let practiceFails = 0;
+let quizFails = 0;
 let weakWords = new Set();
-let pronFailCount = 0;
+let isQuizMode = false;
 
 function init() {
-  if(lessonData.is_premium) document.getElementById('premium-badge').classList.remove('hidden');
-  document.getElementById('time-est').innerText = `⏱️ ${lessonData.estimated_time_minutes} MINS`;
+  if(lessonData.is_premium) {
+    document.getElementById('premium-badge').classList.remove('hidden');
+  }
   loadItem();
+}
+
+function goBack() {
+  if (isQuizMode) {
+    if (quizIdx > 0) {
+      quizIdx--;
+      loadQuiz();
+    } else {
+      isQuizMode = false;
+      document.getElementById('screen-quiz').classList.add('hidden');
+      document.getElementById('screen-learning').classList.remove('hidden');
+      currentIdx = lessonData.content.length - 1;
+      loadItem();
+    }
+  } else {
+    if (currentIdx > 0) {
+      currentIdx--;
+      loadItem();
+    }
+  }
 }
 
 function loadItem() {
   const item = lessonData.content[currentIdx];
-  const normalUI = document.getElementById('normal-content');
-  const dialogueUI = document.getElementById('dialogue-content');
-  
-  if (item.type === 'dialogue') {
-    normalUI.classList.add('hidden');
-    dialogueUI.classList.remove('hidden');
-    dialogueUI.innerHTML = item.lines.map(l => `
-      <div class="border-l-2 border-blue-500 pl-3 mb-2">
-        <p class="text-[10px] font-bold text-blue-600 uppercase">${l.speaker}</p>
-        <p class="font-bold text-slate-800 text-sm">${l.english}</p>
-        <p class="text-xs text-slate-500 italic">${l.somali}</p>
-      </div>
-    `).join('');
-  } else {
-    normalUI.classList.remove('hidden');
-    dialogueUI.classList.add('hidden');
-    document.getElementById('en-text').innerText = item.english;
-    document.getElementById('sw-text').innerText = item.swahili;
-    document.getElementById('so-text').innerText = item.somali;
-  }
-  
-  document.getElementById('speaking-controls').style.display = item.enable_speaking ? 'flex' : 'none';
+  document.getElementById('en-text').innerText = item.english;
+  document.getElementById('so-text').innerText = item.somali;
   updateProgress();
+}
+
+function updateProgress() {
+  const total = lessonData.content.length + lessonData.quiz.length;
+  const val = ((currentIdx + quizIdx) / total) * 100;
+  document.getElementById('progressBar').style.width = val + "%";
+}
+
+function playAudio() {
+  const msg = new SpeechSynthesisUtterance(lessonData.content[currentIdx].english);
+  window.speechSynthesis.speak(msg);
 }
 
 function handleMicClick() {
   const btn = document.getElementById('micBtn');
   btn.classList.replace('bg-blue-600', 'bg-red-600');
-  document.getElementById('micStatus').innerText = "Dhageysanayaa...";
-  
+  document.getElementById('micStatus').innerText = "Waan ku dhageysanayaa (Listening)...";
+
   setTimeout(() => {
     btn.classList.replace('bg-red-600', 'bg-blue-600');
-    document.getElementById('micStatus').innerText = "Taabo si aad u hadasho";
-    const isFail = (currentIdx === 1 && pronFailCount === 0);
-    showAIReview(!isFail);
+    document.getElementById('micStatus').innerText = "Taabo si aad u hadasho (Tap to speak)";
+    const isSuccess = !(currentIdx === 1 && practiceFails < 1);
+    showAIReview(isSuccess);
   }, 1500);
 }
 
 function showAIReview(isSuccess) {
   const overlay = document.getElementById('feedback-overlay');
+  const stars = document.getElementById('feedback-stars');
+  const so = document.getElementById('coach-so');
+  const en = document.getElementById('coach-en');
+
   if (isSuccess) {
-    document.getElementById('feedback-stars').innerText = "⭐⭐⭐⭐⭐";
-    document.getElementById('coach-so').innerText = "Si sax ah ayaad u dhuwaaqday!";
-    document.getElementById('coach-en').innerText = "Perfect pronunciation!";
+    stars.innerText = "⭐⭐⭐⭐⭐";
+    so.innerText = "Si sax ah ayaad u dhuwaaqday!"; 
+    en.innerText = "You pronounced it perfectly!"; 
+    document.getElementById('btnTryAgain').classList.add('hidden');
+    document.getElementById('btnContinue').className = "w-full bg-blue-600 text-white py-3 rounded-xl font-bold";
   } else {
-    pronFailCount++;
+    practiceFails++;
     weakWords.add(lessonData.content[currentIdx].english);
-    document.getElementById('feedback-stars').innerText = "⭐⭐☆☆☆";
-    document.getElementById('coach-so').innerText = "Isku day inaad si tartiib ah u tiraahdo.";
-    document.getElementById('coach-en').innerText = "Try saying it more clearly.";
+    stars.innerText = "⭐⭐☆☆☆";
+    so.innerText = "Codkaagu ma cadda. Isku day inaad si tartiib ah u tiraahdo.";
+    en.innerText = "Your voice isn't clear. Try saying it slowly.";
+    document.getElementById('btnTryAgain').classList.remove('hidden');
+    document.getElementById('btnContinue').className = "w-1/2 bg-slate-200 text-slate-600 py-3 rounded-xl font-bold";
   }
   overlay.classList.remove('hidden');
 }
@@ -192,10 +214,13 @@ function showAIReview(isSuccess) {
 function closeFeedback(moveNext) {
   document.getElementById('feedback-overlay').classList.add('hidden');
   if (moveNext) {
-    pronFailCount = 0;
     currentIdx++;
-    if (currentIdx < lessonData.content.length) loadItem();
-    else startQuiz();
+    practiceFails = 0;
+    if (currentIdx < lessonData.content.length) {
+      loadItem();
+    } else {
+      startQuiz();
+    }
   }
 }
 
@@ -207,80 +232,78 @@ function startQuiz() {
 }
 
 function loadQuiz() {
-  const q = lessonData.quiz_data[quizIdx];
-  document.getElementById('quiz-question-text').innerText = q.question;
+  const q = lessonData.quiz[quizIdx];
+  quizFails = 0;
+  document.getElementById('quiz-question-en').innerText = q.q_en;
+  document.getElementById('quiz-question-so').innerText = q.q_so;
   document.getElementById('quiz-options').innerHTML = '';
-  document.getElementById('quiz-input-container').classList.add('hidden');
   document.getElementById('quiz-hint-box').classList.add('hidden');
+  document.getElementById('quiz-feedback').classList.add('hidden');
   document.getElementById('next-quiz-btn').classList.add('hidden');
 
-  if (q.type === 'fill') {
-    document.getElementById('quiz-input-container').classList.remove('hidden');
-  } else {
-    q.options.forEach(opt => {
-      const b = document.createElement('button');
-      b.className = "quiz-opt w-full p-4 border-2 border-slate-100 rounded-2xl font-bold text-sm active:bg-slate-50";
-      b.innerText = opt;
-      b.onclick = () => {
-        if (opt === q.answer) {
-          b.classList.add('bg-green-100', 'border-green-500', 'text-green-700');
-          document.getElementById('next-quiz-btn').classList.remove('hidden');
-        } else {
-          b.classList.add('shake', 'bg-red-50', 'border-red-200');
-          document.getElementById('quiz-hint-box').classList.remove('hidden');
-          document.getElementById('quiz-hint-text').innerText = q.hint;
-        }
-      };
-      document.getElementById('quiz-options').appendChild(b);
-    });
-  }
+  q.options.forEach(opt => {
+    const b = document.createElement('button');
+    b.className = "quiz-opt w-full p-5 border-2 border-slate-100 rounded-2xl font-bold hover:bg-slate-50 transition";
+    b.innerText = opt;
+    b.onclick = () => checkQuiz(b, opt === q.a);
+    document.getElementById('quiz-options').appendChild(b);
+  });
+  updateProgress();
 }
 
-function checkFillIn() {
-  const val = document.getElementById('quiz-input').value.toLowerCase();
-  const q = lessonData.quiz_data[quizIdx];
-  if (val === q.answer.toLowerCase()) {
+function checkQuiz(btn, isCorrect) {
+  const fb = document.getElementById('quiz-feedback');
+  fb.classList.remove('hidden');
+
+  if (isCorrect) {
+    btn.classList.add('bg-green-100', 'border-green-500', 'text-green-700');
+    fb.innerHTML = "Sax! <span class='text-sm font-normal'>(Correct)</span>";
+    fb.className = "mt-6 font-bold text-lg text-green-600";
     document.getElementById('next-quiz-btn').classList.remove('hidden');
+    document.querySelectorAll('.quiz-opt').forEach(el => el.disabled = true);
   } else {
-    document.getElementById('quiz-hint-box').classList.remove('hidden');
-    document.getElementById('quiz-hint-text').innerText = q.hint;
+    quizFails++;
+    btn.classList.add('shake', 'bg-red-50', 'border-red-400');
+    fb.innerHTML = "Qalad <span class='text-sm font-normal'>(Wrong)</span>. Mar kale isku day.";
+    fb.className = "mt-6 font-bold text-lg text-red-500";
+    
+    if (quizFails >= 1) {
+      document.getElementById('quiz-hint-box').classList.remove('hidden');
+      document.getElementById('quiz-hint-text').innerText = lessonData.quiz[quizIdx].hint;
+    }
   }
 }
 
 function nextQuizQuestion() {
   quizIdx++;
-  if (quizIdx < lessonData.quiz_data.length) loadQuiz();
-  else showDashboard();
+  if (quizIdx < lessonData.quiz.length) {
+    loadQuiz();
+  } else {
+    showDashboard();
+  }
 }
 
 function showDashboard() {
   document.getElementById('screen-quiz').classList.add('hidden');
+  document.getElementById('header').classList.add('hidden');
   document.getElementById('screen-dashboard').classList.remove('hidden');
+  
   const list = document.getElementById('dashboard-list');
   list.innerHTML = '';
   lessonData.content.forEach(item => {
-    if (item.type === 'dialogue') return;
     const isWeak = weakWords.has(item.english);
-    list.innerHTML += `<div class="bg-white rounded-xl shadow-sm p-4 flex justify-between items-center border-l-4 ${isWeak ? 'border-yellow-400' : 'border-green-400'}"><div><h3 class="font-bold text-sm">${item.somali}</h3><p class="text-[10px] text-gray-400 uppercase">${isWeak ? 'Review' : 'Mastered'}</p></div><span class="text-[10px] font-bold ${isWeak ? 'text-yellow-600' : 'text-green-600'}">${isWeak ? '⚠️ WEAK' : '✅ OK'}</span></div>`;
+    list.innerHTML += `
+      <div class="bg-white rounded-2xl shadow p-5 flex justify-between items-center border-l-4 ${isWeak ? 'border-yellow-400' : 'border-green-400'}">
+        <div>
+          <h3 class="font-bold text-slate-800">${item.somali} (${item.english})</h3>
+          <p class="text-xs text-gray-400">${isWeak ? 'Review it in 24/hr or dib u eeg' : 'Maanta ayaad bartay'}</p>
+        </div>
+        <span class="${isWeak ? 'bg-yellow-100 text-yellow-700' : 'bg-green-100 text-green-700'} px-3 py-1 rounded-full text-xs font-bold uppercase">
+          ${isWeak ? '⚠️ Tabar yar (Weak)' : '✅ Waa la bartay (Mastered)'}
+        </span>
+      </div>
+    `;
   });
-}
-
-function goBack() {
-  if (isQuizMode && quizIdx > 0) { quizIdx--; loadQuiz(); }
-  else if (isQuizMode) { isQuizMode = false; document.getElementById('screen-quiz').classList.add('hidden'); document.getElementById('screen-learning').classList.remove('hidden'); }
-  else if (currentIdx > 0) { currentIdx--; loadItem(); }
-}
-
-function updateProgress() {
-  const total = lessonData.content.length + lessonData.quiz_data.length;
-  const currentCount = isQuizMode ? (lessonData.content.length + quizIdx) : currentIdx;
-  const val = Math.round((currentCount / total) * 100);
-  document.getElementById('progressBar').style.width = val + "%";
-}
-
-function playAudio() {
-  const text = lessonData.content[currentIdx].type === 'dialogue' ? 'Conversation' : lessonData.content[currentIdx].english;
-  window.speechSynthesis.speak(new SpeechSynthesisUtterance(text));
 }
 
 init();

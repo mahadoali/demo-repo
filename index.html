@@ -253,6 +253,7 @@ function loadQuiz() {
 
 function checkQuiz(btn, isCorrect) {
   const fb = document.getElementById('quiz-feedback');
+  const q = lessonData.quiz[quizIdx];
   fb.classList.remove('hidden');
 
   if (isCorrect) {
@@ -264,12 +265,25 @@ function checkQuiz(btn, isCorrect) {
   } else {
     quizFails++;
     btn.classList.add('shake', 'bg-red-50', 'border-red-400');
-    fb.innerHTML = "Qalad <span class='text-sm font-normal'>(Wrong)</span>. Mar kale isku day.";
-    fb.className = "mt-6 font-bold text-lg text-red-500";
     
-    if (quizFails >= 1) {
+    // Check if it's the 2nd attempt
+    if (quizFails >= 2) {
+      fb.innerHTML = `Jawaabta saxda ah waa: <b>${q.a}</b>`;
+      fb.className = "mt-6 font-bold text-lg text-blue-600";
+      
+      // Highlight the correct button
+      document.querySelectorAll('.quiz-opt').forEach(el => {
+        el.disabled = true;
+        if(el.innerText === q.a) {
+           el.classList.add('bg-green-100', 'border-green-500', 'text-green-700');
+        }
+      });
+      document.getElementById('next-quiz-btn').classList.remove('hidden');
+    } else {
+      fb.innerHTML = "Qalad <span class='text-sm font-normal'>(Wrong)</span>. Mar kale isku day.";
+      fb.className = "mt-6 font-bold text-lg text-red-500";
       document.getElementById('quiz-hint-box').classList.remove('hidden');
-      document.getElementById('quiz-hint-text').innerText = lessonData.quiz[quizIdx].hint;
+      document.getElementById('quiz-hint-text').innerText = q.hint;
     }
   }
 }
